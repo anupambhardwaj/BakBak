@@ -17,6 +17,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Objects;
+
 public class RegisterActivity extends AppCompatActivity {
 
     private TextInputLayout mDispalyName;
@@ -54,9 +56,9 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                String display_name = mDispalyName.getEditText().getText().toString();
-                String email = mEmail.getEditText().getText().toString();
-                String password = mPassword.getEditText().getText().toString();
+                String display_name = Objects.requireNonNull(mDispalyName.getEditText()).getText().toString();
+                String email = Objects.requireNonNull(mEmail.getEditText()).getText().toString();
+                String password = Objects.requireNonNull(mPassword.getEditText()).getText().toString();
 
                 if(!TextUtils.isEmpty((CharSequence) mDispalyName) || !TextUtils.isEmpty((CharSequence) mEmail) || !TextUtils.isEmpty((CharSequence) mPassword)){
 
