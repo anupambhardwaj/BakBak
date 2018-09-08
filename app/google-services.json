@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "682929349101",
+    "firebase_url": "https://bakbak-e4e71.firebaseio.com",
+    "project_id": "bakbak-e4e71",
+    "storage_bucket": "bakbak-e4e71.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:682929349101:android:69f3f23115ee3755",
+        "android_client_info": {
+          "package_name": "anupam.com.bakbak"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "682929349101-msb4hvqv17f2j4ants0mudafuobno710.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "anupam.com.bakbak",
+            "certificate_hash": "c2e96df98691131933241c4be57ed0dd37ba0ee3"
+          }
+        },
+        {
+          "client_id": "682929349101-a4etho9h3011mamri2phr9dl6pruuftc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpJPZX1UpsyRNf9VrKim5M3KWMNRA-AU4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "682929349101-a4etho9h3011mamri2phr9dl6pruuftc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
