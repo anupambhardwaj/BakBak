@@ -25,4 +25,5 @@
     <string name="prfile_user_status">Current User Status</string>
     <string name="profile_total_friends">Total Friends</string>
     <string name="profile_send_friend_request">Send Friend Request</string>
+    <string name="decline_friend_request">Decline Friend request</string>
 </resources>

@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="101dp"
+        android:layout_marginBottom="141dp"
         android:text="@string/profile_total_friends"
         android:textColor="@android:color/background_light" />
 
@@ -53,9 +53,20 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="79dp"
         android:backgroundTint="@color/colorAccent"
         android:text="@string/profile_send_friend_request"
+        android:textColor="@android:color/background_light" />
+
+    <Button
+        android:id="@+id/profile_deny_req_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="21dp"
+        android:backgroundTint="@color/colorAccent"
+        android:text="@string/decline_friend_request"
         android:textColor="@android:color/background_light" />
 
 </RelativeLayout>
