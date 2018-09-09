@@ -33,7 +33,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="226dp"
-        android:text="@string/hi_there_i_am_using_this_string_app_name"
+        android:text="@string/default_status"
         android:textColor="@android:color/white"
         android:textSize="20dp" />
 
@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="72dp"
+        android:layout_marginBottom="78dp"
         android:backgroundTint="@android:color/background_light"
         android:text="Change Status"
         android:textColor="@color/colorAccent" />
