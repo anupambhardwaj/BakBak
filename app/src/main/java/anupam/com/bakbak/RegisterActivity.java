@@ -7,7 +7,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -19,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -65,17 +65,11 @@ public class RegisterActivity extends AppCompatActivity {
                 String email = Objects.requireNonNull(mEmail.getEditText()).getText().toString();
                 String password = Objects.requireNonNull(mPassword.getEditText()).getText().toString();
 
-                if(!TextUtils.isEmpty((CharSequence) mDispalyName) || !TextUtils.isEmpty((CharSequence) mEmail) || !TextUtils.isEmpty((CharSequence) mPassword)){
-
                     mRegProgress.setTitle("Registering User");
                     mRegProgress.setMessage("Please wait while we create your Account!");
                     mRegProgress.setCanceledOnTouchOutside(false);
                     mRegProgress.show();
                     register_user(display_name, email, password);
-
-                }
-
-
 
             }
         });
@@ -93,12 +87,15 @@ public class RegisterActivity extends AppCompatActivity {
                     FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
                     String uid = current_user.getUid();
 
+                    String deviceToken = FirebaseInstanceId.getInstance().getToken();
+
                     mDatabase = FirebaseDatabase.getInstance().getReference().child("User").child(uid);
                     HashMap<String, String>userMap = new HashMap<>();
                     userMap.put("name", display_name);
                     userMap.put("status", "Hi there! I am using this app");
                     userMap.put("image", "default");
                     userMap.put("thumb_image", "default");
+                    userMap.put("device_token", deviceToken);
 
                     mDatabase.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override

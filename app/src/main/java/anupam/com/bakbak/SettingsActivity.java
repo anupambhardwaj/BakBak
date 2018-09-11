@@ -177,63 +177,61 @@ public class SettingsActivity extends AppCompatActivity {
                     final byte[] thumb_byte = baos.toByteArray();
 
 
+                    final StorageReference filePath = mImageStorage.child("profile_images").child(current_uid + ".jpg");
+                    final StorageReference thumb_filepath = mImageStorage.child("profile_images").child("thumb").child(current_uid + ".jpg");
 
 
-                final StorageReference filePath = mImageStorage.child("profile_images").child(current_uid + ".jpg");
-                final StorageReference thumb_filepath = mImageStorage.child("profile_images").child("thumb").child(current_uid + ".jpg");
+                    filePath.putFile(resultUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
 
+                            if(task.isSuccessful()){
 
-                filePath.putFile(resultUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                                final String download_url = task.getResult().getStorage().getDownloadUrl().toString();
 
-                        if(task.isSuccessful()){
-                            //Edit Check
-                            final String download_url = task.getResult().getStorage().getDownloadUrl().toString();
+                                UploadTask uploadTask = thumb_filepath.putBytes(thumb_byte);
+                                uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> thumb_task) {
 
-                            UploadTask uploadTask = thumb_filepath.putBytes(thumb_byte);
-                            uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> thumb_task) {
-                                    //Edit Check
-                                    String thumb_downloadUrl = thumb_task.getResult().getStorage().getDownloadUrl().toString();
+                                        String thumb_downloadUrl = thumb_task.getResult().getStorage().getDownloadUrl().toString();
 
-                                    if(thumb_task.isSuccessful()){
+                                        if(thumb_task.isSuccessful()){
 
-                                        Map update_hashMap = new HashMap<>();
-                                        update_hashMap.put("image", download_url);
-                                        update_hashMap.put("thumb_image", thumb_downloadUrl);
+                                            Map update_hashMap = new HashMap<>();
+                                            update_hashMap.put("image", download_url);
+                                            update_hashMap.put("thumb_image", thumb_downloadUrl);
 
-                                        mUserDatabase.updateChildren(update_hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if(task.isSuccessful()){
+                                            mUserDatabase.updateChildren(update_hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if(task.isSuccessful()){
 
-                                                    mImgProgressDialog.dismiss();
-                                                    Toast.makeText(SettingsActivity.this, "Upload Successful", Toast.LENGTH_LONG).show();
+                                                        mImgProgressDialog.dismiss();
+                                                        Toast.makeText(SettingsActivity.this, "Upload Successful", Toast.LENGTH_LONG).show();
 
+                                                    }
                                                 }
-                                            }
-                                        });
+                                            });
 
-                                    } else {
+                                        } else {
 
-                                        mImgProgressDialog.dismiss();
+                                            mImgProgressDialog.dismiss();
+                                        }
+
                                     }
-
-                                }
-                            });
+                                });
 
 
 
-                        }else {
+                            }else {
 
-                            mImgProgressDialog.dismiss();
+                                mImgProgressDialog.dismiss();
+
+                            }
 
                         }
-
-                    }
-                });} catch (IOException e) {
+                    });} catch (IOException e) {
 
                 }
 
@@ -245,3 +243,28 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 }
+
+
+                  /* filePath.putFile(resultUri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                        @Override
+                        public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                            if (!task.isSuccessful()) {
+                                throw task.getException();
+                            }
+                            return filePath.getDownloadUrl();
+                        }
+                    }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task) {
+
+                            String url = null;
+                            if (task.isSuccessful()) {
+                                Uri downloadUri = task.getResult();
+                                url = downloadUri.toString();
+                                //  mMessagesDatabaseReference.push().setValue(friendlyMessage);
+                            } else {
+                                Toast.makeText(SettingsActivity.this, url, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+      */
